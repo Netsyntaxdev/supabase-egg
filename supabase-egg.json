@@ -1,0 +1,35 @@
+{
+  "name": "Supabase",
+  "author": "ycastro@netsyntax.es",
+  "description": "Automatiza el despliegue de Supabase con Docker en Pterodactyl.",
+  "docker_images": {
+    "ghcr.io/pterodactyl/yolks:debian": "ghcr.io/pterodactyl/yolks:debian"
+  },
+  "startup": "curl -o docker-compose.yml https://raw.githubusercontent.com/Netsyntaxdev/supabase-egg/main/docker-compose.yml && docker-compose up -d",
+  "environment": {
+    "POSTGRES_PASSWORD": "supabase_password",
+    "JWT_SECRET": "supabase_secret",
+    "ANON_KEY": "supabase_anon_key",
+    "SERVICE_ROLE_KEY": "supabase_service_role_key"
+  },
+  "variables": [
+    {
+      "name": "POSTGRES_PASSWORD",
+      "description": "Contraseña para la base de datos Postgres.",
+      "env_variable": "POSTGRES_PASSWORD",
+      "default_value": "supabase_password",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string|min:8"
+    },
+    {
+      "name": "JWT_SECRET",
+      "description": "El secreto JWT para las autenticaciones.",
+      "env_variable": "JWT_SECRET",
+      "default_value": "supersecret",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string|min:16"
+    }
+  ]
+}
